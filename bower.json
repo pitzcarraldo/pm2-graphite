@@ -1,0 +1,20 @@
+{
+  "name": "pm2-monyt",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": "Minkyu Cho <mrnoname@naver.com>",
+  "private": false,
+  "main": [
+    "dist/pm2-monyt.js",
+    "dist/pm2-monyt.min.js"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test"
+  ],
+  "moduleType": [
+    "globals"
+  ]
+}
