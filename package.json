@@ -36,6 +36,7 @@
     "prepublish": "npm run clean && npm run build"
   },
   "dependencies": {
+    "babel-promisify": "^1.0.0",
     "monyt": "^0.1.0",
     "pm2": "^1.0.1",
     "pmx": "^0.6.0",
@@ -50,9 +51,9 @@
     }
   ],
   "config": {
-    "app_name": "reduxible-example",
-    "graphite_host": "localhost",
-    "graphite_port": "2003"
+    "app": "reduxible-example",
+    "host": "localhost",
+    "port": "2003"
   },
   "devDependencies": {
     "babel-cli": "^6.4.0",

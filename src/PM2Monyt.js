@@ -27,7 +27,6 @@ export default class PM2Monyt {
               this.metricses[id]).reduce(
               (curr, key) => ({ ...curr, ...this.template(id, key, this.metricses[id][key]) })
               , prev), {});
-        console.log(toSend);
         this.sender.send(toSend)
           .then(() => {
             this.metricses = {};
@@ -35,5 +34,6 @@ export default class PM2Monyt {
           .catch(error => console.error(error));
       }
     });
+    return this;
   }
 }
