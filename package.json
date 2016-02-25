@@ -1,26 +1,26 @@
 {
-  "name": "pm2-monyt",
-  "description": "PM2 cluster monitoring addon",
+  "name": "pm2-monyt-graphite",
+  "description": "PM2 graphite sender module for send aggregated metricses from Monyt.",
   "version": "0.0.0",
   "author": "Minkyu Cho <mrnoname@naver.com>",
   "license": "MIT",
-  "homepage": "https://github.com/Pitzcarraldo/pm2-monyt",
+  "homepage": "https://github.com/Pitzcarraldo/pm2-monyt-graphite",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
   "files": [
     "lib",
     "src"
   ],
-  "npmName": "pm2-monyt",
+  "npmName": "pm2-monyt-graphite",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Pitzcarraldo/pm2-monyt.git"
+    "url": "git+https://github.com/Pitzcarraldo/pm2-monyt-graphite.git"
   },
   "bugs": {
-    "url": "https://github.com/Pitzcarraldo/pm2-monyt/issues"
+    "url": "https://github.com/Pitzcarraldo/pm2-monyt-graphite/issues"
   },
   "keywords": [
-    "pm2-monyt"
+    "pm2-monyt-graphite"
   ],
   "scripts": {
     "clean": "rimraf lib coverage",
@@ -44,7 +44,7 @@
   },
   "apps": [
     {
-      "name": "pm2-monyt",
+      "name": "pm2-monyt-graphite",
       "script": "lib/index.js",
       "merge_logs": true,
       "max_memory_restart": "50M"

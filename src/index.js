@@ -7,6 +7,7 @@ import PM2Monyt from './PM2Monyt';
 
 const conf = pmx.initModule({});
 const { app, host, port } = conf;
+
 const exit = () => {
   pm2.disconnect();
   pm2.disconnectBus();
@@ -19,8 +20,8 @@ const exit = () => {
       exit();
       throw new Error('This PM2 version is not compatible with %s!!', pkg.name);
     }
-    const list = await $p(pm2.list)();
     const bus = await $p(pm2.launchBus).call(pm2);
+    const list = await $p(pm2.list)();
     const clusters = list.filter(each => each.name === app);
     const monyt = new PM2Monyt({ clusters, host, port, bus });
     monyt.listen();
