@@ -22,7 +22,7 @@ export default class Graphite extends GraphiteClient {
         lines.push([ key, value, timestamp, '\n' ].join(' '));
       });
       try {
-        res(this.socket.write(lines.join()));
+        res(this.socket.write(lines.join('')));
       } catch (err) {
         rej(err);
       }
