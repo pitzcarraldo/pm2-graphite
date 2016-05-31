@@ -7,10 +7,11 @@ export default class Metrics {
 
   push(id, metrics) {
     const flat = flatten(metrics);
+    const timestamp = Date.now();
     this.metrics.push(Object.keys(flat).reduce((prevMetrics, metricsKey) => {
       prevMetrics[metricsKey.replace('$id', id)] = {
-        value: flat[metricsKey],
-        timestamp: Date.now()
+        value: JSON.stringify(flat[metricsKey]),
+        timestamp
       };
       return prevMetrics;
     }, {}));
