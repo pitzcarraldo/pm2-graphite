@@ -1,8 +1,19 @@
 import GraphiteClient from 'graphite-client';
 
 export default class Graphite extends GraphiteClient {
+  constructor(...options) {
+    super(...options);
+    this.connect(error => {
+      if (error) {
+        console.error(error);
+        return;
+      }
+      console.log('Connected to Graphite server');
+    });
+  }
+  
   write(metrics, callback) {
-    const flatt = super.flatten(metrics);
+    const flatt = this.flatten(metrics);
     const lines = [];
     Object.keys(flatt).forEach(key => {
       const value = flatt[key].value;
@@ -10,7 +21,7 @@ export default class Graphite extends GraphiteClient {
       lines.push([ key, value, timestamp ].join(' '));
     });
     try {
-      super.socket.write(lines.join('\n'));
+      this.socket.write(lines.join('\n'));
     } catch (err) {
       if (callback) {
         callback(err);
