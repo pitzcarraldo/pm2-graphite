@@ -2,11 +2,33 @@ import pm2 from 'pm2';
 import pmx from 'pmx';
 import semver from 'semver';
 import $p from 'babel-promisify';
+import flatten from 'flat';
 import pkg from '../package.json';
-import PM2Monyt from './PM2Monyt';
+import Listener from './Listener';
 
-const conf = pmx.initModule({});
-const { app, host, port } = conf;
+const loadConfig = (path) => {
+  try {
+    const rawConfig = flatten(require(path));
+    return Object.keys(rawConfig).reduce((config, key) => {
+      if (key.toLowerCase().includes('graphite.host')) {
+        config.host = rawConfig[key];
+      }
+      if (key.toLowerCase().includes('graphite.port')) {
+        config.port = rawConfig[key];
+      }
+      return config;
+    }, {});
+  } catch (error) {
+    return null;
+  }
+};
+
+const getClient = () => {
+  const { path, host, port, interval = 10000 } = pmx.initModule({});
+  const config = (path && loadConfig(path)) || {};
+  return { host, port, interval, ...config };
+};
+
 
 const exit = () => {
   pm2.disconnect();
@@ -21,9 +43,7 @@ const exit = () => {
       throw new Error('This PM2 version is not compatible with %s!!', pkg.name);
     }
     const bus = await $p(pm2.launchBus).call(pm2);
-    const list = await $p(pm2.list)();
-    const clusters = list.filter(each => each.name === app);
-    const monyt = new PM2Monyt({ clusters, host, port, bus });
+    const monyt = new Listener({ ...getClient(), bus });
     monyt.listen();
     console.log('[%s:%s] ready', pkg.name, pkg.version);
   } catch (error) {

@@ -1,26 +1,28 @@
 {
-  "name": "pm2-monyt-graphite",
-  "description": "PM2 graphite sender module for send aggregated metricses from Monyt.",
+  "name": "pm2-graphite",
+  "description": "PM2 graphite sender module to send aggregated metrics.",
   "version": "0.0.0",
   "author": "Minkyu Cho <mrnoname@naver.com>",
   "license": "MIT",
-  "homepage": "https://github.com/Pitzcarraldo/pm2-monyt-graphite",
+  "homepage": "https://github.com/Pitzcarraldo/pm2-graphite",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
   "files": [
     "lib",
     "src"
   ],
-  "npmName": "pm2-monyt-graphite",
+  "npmName": "pm2-graphite",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Pitzcarraldo/pm2-monyt-graphite.git"
+    "url": "git+https://github.com/Pitzcarraldo/pm2-graphite.git"
   },
   "bugs": {
-    "url": "https://github.com/Pitzcarraldo/pm2-monyt-graphite/issues"
+    "url": "https://github.com/Pitzcarraldo/pm2-graphite/issues"
   },
   "keywords": [
-    "pm2-monyt-graphite"
+    "pm2",
+    "graphite",
+    "pm2-graphite"
   ],
   "scripts": {
     "clean": "rimraf lib coverage",
@@ -36,15 +38,16 @@
     "prepublish": "npm run clean && npm run build"
   },
   "dependencies": {
-    "babel-promisify": "^1.0.0",
-    "monyt": "^0.1.0",
-    "pm2": "^1.0.1",
-    "pmx": "^0.6.0",
-    "semver": "^5.1.0"
+    "babel-promisify": "1.0.0",
+    "flat": "2.0.0",
+    "graphite-client": "1.0.1",
+    "pm2": "1.0.1",
+    "pmx": "0.6.0",
+    "semver": "5.1.0"
   },
   "apps": [
     {
-      "name": "pm2-monyt-graphite",
+      "name": "pm2-graphite",
       "script": "lib/index.js",
       "merge_logs": true,
       "max_memory_restart": "50M"
@@ -56,21 +59,21 @@
     "port": "2003"
   },
   "devDependencies": {
-    "babel-cli": "^6.4.0",
-    "babel-core": "^6.4.0",
-    "babel-eslint": "^5.0.0",
-    "babel-plugin-transform-runtime": "^6.4.3",
-    "babel-preset-es2015": "^6.3.13",
-    "babel-preset-es2015-loose": "^7.0.0",
-    "babel-preset-react": "^6.3.13",
-    "babel-preset-stage-0": "^6.3.13",
-    "eslint": "^1.7.1",
-    "eslint-config-rackt": "^1.1.1",
-    "chai": "^3.5.0",
-    "isparta": "^4.0.0",
-    "istanbul-coveralls": "^1.0.3",
-    "mocha": "^2.2.5",
-    "rimraf": "^2.3.4"
+    "babel-cli": "6.4.0",
+    "babel-core": "6.4.0",
+    "babel-eslint": "5.0.0",
+    "babel-plugin-transform-runtime": "6.4.3",
+    "babel-preset-es2015": "6.3.13",
+    "babel-preset-es2015-loose": "7.0.0",
+    "babel-preset-react": "6.3.13",
+    "babel-preset-stage-0": "6.3.13",
+    "chai": "3.5.0",
+    "eslint": "1.7.1",
+    "eslint-config-rackt": "1.1.1",
+    "isparta": "4.0.0",
+    "istanbul-coveralls": "1.0.3",
+    "mocha": "2.2.5",
+    "rimraf": "2.3.4"
   },
   "devEngines": {
     "node": "4.x || 5.x",
