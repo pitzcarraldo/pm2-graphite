@@ -52,6 +52,7 @@
   },
   "dependencies": {
     "babel-promisify": "1.0.0",
+    "babel-runtime": "6.9.2",
     "flat": "2.0.0",
     "graphite-client": "1.0.1",
     "pm2": "1.1.3",
