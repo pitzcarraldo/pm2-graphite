@@ -27,8 +27,10 @@ $ pm2 set pm2-graphite:port 2003 #target graphite port
 
 ```json
 {
-  "host": "my.graphite.host.com",
-  "port": 2003
+  "graphite": {
+    "host": "my.graphite.host.com",
+    "port": 2003
+  }
 }
 ```
 
