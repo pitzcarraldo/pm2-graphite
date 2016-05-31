@@ -48,7 +48,7 @@
   "config": {
     "host": "localhost",
     "port": 2003,
-    "interval": 100000
+    "interval": 10000
   },
   "dependencies": {
     "babel-promisify": "1.0.0",
