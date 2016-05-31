@@ -11,10 +11,7 @@ export default class Listener {
     this.metrics = new Metrics();
   }
 
-  async listen() {
-    const result = await this.sender.connect();
-    console.log(result);
-
+  listen() {
     this.bus.on('process:msg', ({ raw : { metrics }, process }) => {
       if (metrics) {
         this.metrics.push(process.pm_id, metrics);
