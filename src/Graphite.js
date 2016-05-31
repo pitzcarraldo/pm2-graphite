@@ -16,8 +16,7 @@ export default class Graphite extends CarbonClient {
         lines += [ key, value, timestamp ].join(' ') + '\n';
       });
 
-      console.log(lines);
-      res(this._socket.write(lines, 'UTF-8', error => {
+      res(this._socket.write(lines + '\n', 'UTF-8', error => {
         rej(error);
       }));
     });
