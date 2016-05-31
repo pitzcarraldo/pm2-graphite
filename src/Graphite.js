@@ -1,17 +1,7 @@
 import GraphiteClient from 'graphite-client';
 
 export default class Graphite extends GraphiteClient {
-  constructor(...options) {
-    super(...options);
-    this.connect(error => {
-      if (error) {
-        console.error(error);
-        return;
-      }
-      console.log('Connected to Graphite server');
-    });
-  }
-  
+
   write(metrics, callback) {
     const flatt = this.flatten(metrics);
     const lines = [];

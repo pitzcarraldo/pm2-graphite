@@ -11,6 +11,13 @@ export default class Listener {
     this.sender = new Graphite(options.host, options.port, 'UTF-8', DEFAULT_TIMEOUT, () => {
       console.log('Graphite server connection timeout');
     });
+    this.sender.connect(error => {
+      if (error) {
+        console.error(error);
+        return;
+      }
+      console.log('Connected to Graphite server');
+    });
     this.metrics = new Metrics();
   }
 

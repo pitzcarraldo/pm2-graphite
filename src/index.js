@@ -43,8 +43,9 @@ const exit = () => {
       throw new Error('This PM2 version is not compatible with %s!!', pkg.name);
     }
     const bus = await $p(pm2.launchBus).call(pm2);
-    const monyt = new Listener({ ...getClient(), bus });
-    monyt.listen();
+    console.log(getClient());
+    const listener = new Listener({ ...getClient(), bus });
+    listener.listen();
     console.log('[%s:%s] ready', pkg.name, pkg.version);
   } catch (error) {
     console.error(error.stack);
