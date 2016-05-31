@@ -15,14 +15,16 @@ export default class Graphite extends GraphiteClient {
 
   write(metrics) {
     return new Promise((res, rej) => {
-      const lines = [];
+      let lines = '';
       Object.keys(metrics).forEach(key => {
         const value = metrics[key].value;
         const timestamp = Math.floor((metrics[key].timestamp || Date.now()) / 1000);
-        lines.push(`${[ key, value, timestamp ].join(' ')}\n`);
+        lines += [ key, value, timestamp ].join(' ') + '\n';
       });
+
       try {
-        res(this.socket.write(lines.join('')));
+        console.log(lines);
+        res(this.socket.write(lines));
       } catch (err) {
         rej(err);
       }
