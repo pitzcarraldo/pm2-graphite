@@ -55,7 +55,7 @@ $ pm2 set pm2-graphite:port 2003 #target graphite port
 
 const metrics = {
   'app_name.$id.metricsName': metricsValue // String `$id` will replaced to app id of PM2. (Only first appeared string)
-  'app_name.$id.requestCount': 10000 // Example
+  'app_name.$id.requestCounts': 10000 // Example
 };
 process.send && process.send({ metrics });
 
