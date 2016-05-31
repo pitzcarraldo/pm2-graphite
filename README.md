@@ -17,7 +17,7 @@ If you send messages from cluster of PM2, pm2-graphite will aggregate and send t
 $ pm2 install pm2-graphite
 $ pm2 set pm2-graphite:interval 30000 # Default: 10000(ms)
 # with configurtaion file
-$ pm2 set pm2-graphite: /absolute/path/of/the/configuration/file
+$ pm2 set pm2-graphite:path /absolute/path/of/the/configuration/file
 # with pm2 configurtaion
 $ pm2 set pm2-graphite:host my.graphite.host.com #target graphite host
 $ pm2 set pm2-graphite:port 2003 #target graphite port
