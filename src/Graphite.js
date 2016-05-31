@@ -1,16 +1,14 @@
-import graphite from 'graphite';
+import CarbonClient from 'graphite/lib/CarbonClient';
 
-export default class Graphite {
+export default class Graphite extends CarbonClient {
   constructor(host, port) {
-    this.client = graphite.createClient(`plaintext://${host}:${port}/`);
-    this.carbon = this.client._carbon;
-    this.socket = this.carbon._socket;
+    super({ dsn: `plaintext://${host}:${port}/` });
   }
 
   write(metrics) {
-    return new Promise((res, rej) => {
-      this.carbon._lazyConnect();
+    this._lazyConnect();
 
+    return new Promise((res, rej) => {
       let lines = '';
       Object.keys(metrics).forEach(key => {
         const value = metrics[key].value;
@@ -19,7 +17,7 @@ export default class Graphite {
       });
 
       console.log(lines);
-      res(this.socket.write(lines, 'UTF-8', error => {
+      res(this._socket.write(lines, 'UTF-8', error => {
         rej(error);
       }));
     });
