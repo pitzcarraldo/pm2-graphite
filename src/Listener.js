@@ -11,17 +11,13 @@ export default class Listener {
     this.sender = new Graphite(options.host, options.port, 'UTF-8', DEFAULT_TIMEOUT, () => {
       console.log('Graphite server connection timeout');
     });
-    this.sender.connect(error => {
-      if (error) {
-        console.error(error);
-        return;
-      }
-      console.log('Connected to Graphite server');
-    });
     this.metrics = new Metrics();
   }
 
-  listen() {
+  async listen() {
+    const result = await this.sender.connect();
+    console.log(result);
+
     this.bus.on('process:msg', ({ raw : { metrics }, process }) => {
       if (metrics) {
         this.metrics.push(process.pm_id, metrics);
@@ -29,13 +25,9 @@ export default class Listener {
     });
 
     setInterval(() => {
-      this.sender.write(this.metrics.flatten(), error => {
-        if (error) {
-          console.error(error.stack);
-          return;
-        }
-        this.metrics.empty();
-      });
+      this.sender.write(this.metrics.flatten())
+        .then(() => this.metrics.empty())
+        .catch(error => console.error(error.stack));
     }, this.interval);
 
     return this;
