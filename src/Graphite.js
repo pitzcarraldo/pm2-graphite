@@ -15,11 +15,10 @@ export default class Graphite extends GraphiteClient {
 
   write(metrics) {
     return new Promise((res, rej) => {
-      const flatt = this.flatten(metrics);
       const lines = [];
-      Object.keys(flatt).forEach(key => {
-        const value = flatt[key].value;
-        const timestamp = Math.floor((flatt[key].timestamp || Date.now()) / 1000);
+      Object.keys(metrics).forEach(key => {
+        const value = metrics[key].value;
+        const timestamp = Math.floor((metrics[key].timestamp || Date.now()) / 1000);
         lines.push([ key, value, timestamp ].join(' '));
       });
       try {
