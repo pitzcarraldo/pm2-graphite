@@ -1,20 +1,16 @@
-import GraphiteClient from 'graphite-client';
+import graphite from 'graphite';
 
-export default class Graphite extends GraphiteClient {
-
-  connect() {
-    return new Promise((res, rej) => {
-      super.connect(error => {
-        if (error) {
-          return rej(error);
-        }
-        return res('Connected to Graphite server');
-      });
-    });
+export default class Graphite {
+  constructor(host, port) {
+    this.client = graphite.createClient(`plaintext://${host}:${port}/`);
+    this.carbon = this.client._carbon;
+    this.socket = this.carbon._socket;
   }
 
   write(metrics) {
     return new Promise((res, rej) => {
+      this.carbon._lazyConnect();
+
       let lines = '';
       Object.keys(metrics).forEach(key => {
         const value = metrics[key].value;
@@ -22,12 +18,10 @@ export default class Graphite extends GraphiteClient {
         lines += [ key, value, timestamp ].join(' ') + '\n';
       });
 
-      try {
-        console.log(lines);
-        res(this.socket.write(lines));
-      } catch (err) {
-        rej(err);
-      }
+      console.log(lines);
+      res(this.socket.write(lines, 'UTF-8', error => {
+        rej(error);
+      }));
     });
   }
 }
