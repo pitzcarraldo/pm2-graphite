@@ -19,7 +19,7 @@ export default class Graphite extends GraphiteClient {
       Object.keys(metrics).forEach(key => {
         const value = metrics[key].value;
         const timestamp = Math.floor((metrics[key].timestamp || Date.now()) / 1000);
-        lines.push([ key, value, timestamp, '\n' ].join(' '));
+        lines.push(`${[ key, value, timestamp ].join(' ')}\n`);
       });
       try {
         res(this.socket.write(lines.join('')));
