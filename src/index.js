@@ -24,7 +24,7 @@ const loadConfig = (path) => {
 };
 
 const getClient = () => {
-  const { path, host, port, interval = 10000 } = pmx.initModule({});
+  const { path, host, port, interval } = pmx.initModule({});
   const config = (path && loadConfig(path)) || {};
   return { host, port, interval, ...config };
 };
