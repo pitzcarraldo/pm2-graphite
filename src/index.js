@@ -44,7 +44,7 @@ const exit = () => {
     }
     const bus = await $p(pm2.launchBus).call(pm2);
     const listener = new Listener({ ...getClient(), bus });
-    await listener.listen();
+    listener.listen();
     console.log('[%s:%s] ready', pkg.name, pkg.version);
   } catch (error) {
     console.error(error.stack);
