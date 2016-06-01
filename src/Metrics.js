@@ -9,6 +9,10 @@ export default class Metrics {
     const flat = flatten(metrics);
     const timestamp = Date.now();
     this.metrics.push(Object.keys(flat).reduce((prevMetrics, metricsKey) => {
+      const value = flat[metricsKey];
+      if (typeof value === 'object' && Object.keys(value).length <= 0) {
+        return prevMetrics;
+      }
       prevMetrics[metricsKey.replace('$id', id)] = {
         value: JSON.stringify(flat[metricsKey]),
         timestamp

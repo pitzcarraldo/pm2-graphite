@@ -9,14 +9,15 @@ export default class Graphite extends CarbonClient {
     this._lazyConnect();
 
     return new Promise((res, rej) => {
-      let lines = '';
-      Object.keys(metrics).forEach(key => {
+
+      const lines = Object.keys(metrics).reduce((prevLines, key) => {
         const value = metrics[key].value;
         const timestamp = Math.floor((metrics[key].timestamp || Date.now()) / 1000);
-        lines += [ key, value, timestamp ].join(' ') + '\n';
-      });
+        prevLines.push(`${[ key, value, timestamp ].join(' ')}\n`);
+        return prevLines;
+      }, []).join('');
 
-      res(this._socket.write(lines + '\n', 'UTF-8', error => {
+      res(this._socket.write(lines, 'UTF-8', error => {
         rej(error);
       }));
     });
