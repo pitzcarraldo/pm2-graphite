@@ -45,7 +45,6 @@ For now, PM2-Graphite Only Support cluster mode.
       "name": "app_name",
       "...": "...",
       "exec_mode": "cluster"
-      }
     }
   ]
 }
