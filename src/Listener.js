@@ -1,12 +1,10 @@
 import Graphite from './Graphite';
 import Metrics from './Metrics';
 
-const DEFAULT_INTERVAL = 10000;
-
 export default class Listener {
   constructor(options = {}) {
     this.bus = options.bus;
-    this.interval = options.interval || DEFAULT_INTERVAL;
+    this.interval = options.interval;
     this.sender = new Graphite(options.host, options.port);
     this.metrics = new Metrics();
   }

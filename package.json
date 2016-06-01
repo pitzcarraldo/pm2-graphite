@@ -1,7 +1,7 @@
 {
   "name": "pm2-graphite",
   "description": "PM2 graphite sender module to send aggregated metrics.",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "Minkyu Cho <mrnoname@naver.com>",
   "license": "MIT",
   "homepage": "https://github.com/Pitzcarraldo/pm2-graphite",

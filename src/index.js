@@ -53,7 +53,7 @@ const exit = () => {
 })();
 
 /**
- * When PM2 try to kill app
+ * When PM2 tries to kill app
  */
 process.on('SIGINT', () => {
   exit();

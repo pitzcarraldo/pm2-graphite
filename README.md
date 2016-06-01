@@ -36,13 +36,15 @@ $ pm2 set pm2-graphite:port 2003 #target graphite port
 
 ### PM2 Application Configuration (`app.json`)
 
+For now, PM2-Graphite Only Support cluster mode.
+
 ```json
 {
   "apps": [
     {
       "name": "app_name",
-      "...": "~~~"
-      "exec_mode": "cluster", // Only work with cluster mode, for now
+      "...": "...",
+      "exec_mode": "cluster"
       }
     }
   ]
@@ -75,3 +77,7 @@ process.send && process.send({ metrics });
     "app_name.4.errorCounts" : 10
 }
 ```
+
+## Monyt
+
+If you use [Monyt](https://github.com/Pitzcarraldo/monyt) with its [ProcessSender](https://github.com/Pitzcarraldo/monyt/blob/master/src/sender/ProcessSender.js), you could make metrics to send easily.
